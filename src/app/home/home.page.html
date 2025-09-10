@@ -1,20 +1,87 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>🧠 Sistema 128 AI</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- HEADER STATUS -->
+  <div class="status-header">
+    <h2>Sistema 128 Modelli AI</h2>
+    <p>{{activeModels.length}}/{{availableModels.length}} modelli attivi</p>
   </div>
+
+  <!-- AI MODELS GRID -->
+  <div class="models-section">
+    <h3>Modelli AI Disponibili</h3>
+    <div class="models-grid">
+      <ion-chip 
+        *ngFor="let model of availableModels; let i = index" 
+        [color]="isModelActive(model) ? 'primary' : 'medium'"
+        (click)="toggleModel(model)"
+        class="model-chip">
+        <ion-label>
+          <div class="model-name">{{getModelRole(i)}}</div>
+          <div class="model-type">{{getModelShortName(model)}}</div>
+        </ion-label>
+      </ion-chip>
+    </div>
+  </div>
+
+  <!-- CHAT MESSAGES -->
+  <div class="chat-section">
+    <h3>Conversazione</h3>
+    <div class="messages-container">
+      <div 
+        *ngFor="let message of messages" 
+        [ngClass]="'message message-' + message.type"
+        class="message-item">
+        <div class="message-content" [innerHTML]="message.content"></div>
+        <div class="message-time">{{message.timestamp | date:'HH:mm:ss'}}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <ion-progress-bar 
+    *ngIf="isProcessing" 
+    [value]="progressValue"
+    color="primary">
+  </ion-progress-bar>
+
+  <!-- INPUT AREA -->
+  <div class="input-section">
+    <ion-item>
+      <ion-textarea
+        [(ngModel)]="currentQuestion"
+        placeholder="Scrivi la tua domanda per 128 modelli AI..."
+        rows="3"
+        maxlength="500"
+        [disabled]="isProcessing">
+      </ion-textarea>
+    </ion-item>
+    
+    <ion-button 
+      expand="block" 
+      (click)="processQuestion()"
+      [disabled]="isProcessing || !currentQuestion?.trim() || activeModels.length === 0"
+      color="primary"
+      class="send-button">
+      <ion-icon name="send" slot="start"></ion-icon>
+      {{isProcessing ? 'Analizzando...' : 'Analizza con ' + activeModels.length + ' AI'}}
+    </ion-button>
+  </div>
+
+  <!-- FLOATING ACTION BUTTONS -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" (click)="selectAllModels()">
+      <ion-icon name="checkmark-done"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="danger" (click)="clearAllModels()">
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
