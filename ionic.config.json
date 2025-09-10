@@ -1,0 +1,7 @@
+{
+  "name": "sistema-ai-android",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
