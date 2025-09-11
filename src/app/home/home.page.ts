@@ -108,7 +108,7 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     await this.loadAvailableModels();
-    this.addSystemMessage('🚀 Sistema 128 Modelli AI inizializzato!');
+    this.addSystemMessage('🚀 Sistema 144 Modelli AI inizializzato!');
     this.addSystemMessage('Seleziona i modelli AI e inizia a fare domande.');
   }
 
@@ -152,12 +152,69 @@ export class HomePage implements OnInit {
 
   private generateFallbackModels(): string[] {
     return [
+      // DeepSeek R1 Series (9 modelli)
       'deepseek-r1:70b', 'deepseek-r1:14b', 'deepseek-r1:8b', 'deepseek-r1:7b',
-      'llama3.3:70b', 'llama3.1:8b', 'llama3.2:3b', 'llama3.2:1b',
-      'gemma3:27b', 'gemma3:12b', 'gemma3:4b', 'gemma3:1b',
-      'mistral:latest', 'mistral:7b', 'mistral-nemo:latest', 'mixtral:latest',
-      'qwen2.5:32b', 'qwen2.5:14b', 'qwen2.5:7b', 'qwen2.5:3b',
-      'phi4:14b', 'codegeex4:latest', 'llava:latest', 'openchat:latest'
+      'deepseek-r1:latest', 'deepseek-r1:1.5b', 'deepseek-coder-v2:latest',
+      'deepseek-coder-v2:16b', 'deepseek-coder:1.3b',
+      
+      // LLaMA 3.x Series (11 modelli)
+      'llama3.3:70b', 'llama3.2-vision:11b', 'llama3.1:8b', 'llama3.1:latest',
+      'llama3:latest', 'llama3:8b', 'llama3.2:latest', 'llama3.2:3b', 'llama3.2:1b',
+      'llama2:13b', 'llama2:latest',
+      
+      // Gemma 3.x Series (10 modelli)
+      'gemma3:27b', 'gemma3:12b', 'gemma3:4b', 'gemma3:latest', 'gemma3:1b',
+      'gemma2:27b', 'gemma2:latest', 'gemma2:9b', 'gemma2:2b', 'gemma:latest',
+      
+      // Mistral Series (9 modelli)
+      'mistral:latest', 'mistral:7b', 'mistral:7b-instruct', 'mistral:7b-instruct-q4_0',
+      'mistral-small:latest', 'mistral-nemo:latest', 'mistral-7b-local:latest',
+      'eko-mistral-small:latest', 'mixtral:latest',
+      
+      // Qwen 2.5 Series (17 modelli)
+      'qwen2.5:32b', 'qwen2.5:14b', 'qwen2.5:7b', 'qwen2.5:3b', 'qwen2.5:1.5b',
+      'qwen2.5:latest', 'qwen2.5:7b-8k', 'qwen2.5:7b-instruct-q4_K_M',
+      'qwen2.5-coder:32b', 'qwen2.5-coder:14b', 'qwen2.5-coder:7b', 'qwen2.5-coder:1.5b',
+      'qwen2.5-coder:latest', 'qwen2:latest', 'qwen2-math:latest',
+      'library-qwen:latest', 'deepseek-qwen-q3k-l:latest',
+      
+      // Altri Modelli Specializzati (88+ modelli)
+      'phi4:14b-q8_0', 'nous-hermes2:10.7b', 'codegeex4:latest',
+      'llava:latest', 'olmo2:latest', 'openchat:latest', 'orca-mini:latest',
+      'codellama:latest', 'codellama:13b', 'codellama:7b', 'codellama:34b',
+      'vicuna:latest', 'vicuna:13b', 'vicuna:7b',
+      'alpaca:latest', 'alpaca:7b',
+      'falcon:latest', 'falcon:7b', 'falcon:40b',
+      'mpt:latest', 'mpt:7b', 'mpt:30b',
+      'stablelm:latest', 'stablelm:7b',
+      'dolly:latest', 'dolly:12b',
+      'gpt4all:latest', 'gpt4all:7b',
+      'wizard:latest', 'wizard:13b', 'wizard:7b',
+      'orca:latest', 'orca:13b', 'orca:7b',
+      'starling:latest', 'starling:7b',
+      'neural-chat:latest', 'neural-chat:7b',
+      'zephyr:latest', 'zephyr:7b',
+      'tinyllama:latest', 'tinyllama:1.1b',
+      'phi:latest', 'phi:2.7b',
+      'solar:latest', 'solar:10.7b',
+      'yi:latest', 'yi:34b', 'yi:6b',
+      'deepseek-llm:latest', 'deepseek-llm:7b',
+      'internlm:latest', 'internlm:7b', 'internlm:20b',
+      'baichuan:latest', 'baichuan:13b', 'baichuan:7b',
+      'chatglm:latest', 'chatglm:6b',
+      'aquila:latest', 'aquila:7b',
+      'bloom:latest', 'bloom:7b1',
+      'opt:latest', 'opt:6.7b', 'opt:13b',
+      'galactica:latest', 'galactica:6.7b',
+      'pythia:latest', 'pythia:6.9b', 'pythia:12b',
+      'redpajama:latest', 'redpajama:7b',
+      'open-llama:latest', 'open-llama:7b', 'open-llama:13b',
+      'moss:latest', 'moss:16b',
+      'chinese-llama:latest', 'chinese-llama:7b',
+      'belle:latest', 'belle:7b',
+      'firefly:latest', 'firefly:7b',
+      'tiger:latest', 'tiger:13b',
+      'phoenix:latest', 'phoenix:7b'
     ];
   }
 
