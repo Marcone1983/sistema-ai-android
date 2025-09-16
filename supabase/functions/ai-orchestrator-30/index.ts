@@ -291,11 +291,12 @@ const AI_ROLES = [
 ];
 
 interface AIRequest {
-  question: string;
+  question?: string;
   models?: string[];
   rounds?: number;
   anti_fake?: boolean;
   banned_terms?: string[];
+  action?: string;
 }
 
 interface AIResponse {
@@ -335,9 +336,26 @@ serve(async (req) => {
       )
     }
 
-    // POST: Processa domanda con orchestrazione AI
+    // POST: Processa domanda con orchestrazione AI o ritorna modelli
     if (req.method === 'POST') {
       const body: AIRequest = await req.json()
+      
+      // Se richiesta per ottenere modelli
+      if (body.action === 'get_models') {
+        return new Response(
+          JSON.stringify({
+            models: AI_MODELS,
+            roles: AI_ROLES,
+            count: AI_MODELS.length,
+            success: true
+          }),
+          { 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            status: 200 
+          }
+        )
+      }
+      
       const { question, models = AI_MODELS.slice(0, 20), rounds = 1, anti_fake = true } = body
 
       // Validazione anti-fake

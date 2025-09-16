@@ -121,12 +121,15 @@ export class HomePage implements OnInit {
       await loading.present();
 
       // Carica modelli da Supabase Edge Function
-      const response = await this.http.get<{models: string[]}>(`${this.API_BASE_URL}/ai-orchestrator-30`, {
-        headers: {
-          'Authorization': `Bearer ${this.SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
+      const response = await this.http.post<{models: string[], success: boolean}>(`${this.API_BASE_URL}/ai-orchestrator-30`, 
+        { action: 'get_models' },
+        {
+          headers: {
+            'Authorization': `Bearer ${this.SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json'
+          }
         }
-      }).toPromise();
+      ).toPromise();
 
       if (response && response.models) {
         this.availableModels = response.models;
